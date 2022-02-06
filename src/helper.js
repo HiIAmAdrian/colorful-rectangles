@@ -7,6 +7,10 @@ export function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+export function inRange(number, min, max){
+  return number <= max && number >= min;
+}
+
 export function fillBoard(strBoard) {
   strBoard = strBoard.split('');
   let board = Array(9)

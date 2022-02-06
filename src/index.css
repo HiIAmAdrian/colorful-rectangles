@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body, html{  
+  height:100%
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -25,14 +29,7 @@ code {
   border: 1px solid black;
 }
 
-.box-list{
-  background-color: #cfe2f3;
-  height: 450px;
-  width: 90%;
-  margin: auto;
-  margin-top: 50px;
-  border: 1px solid black;
-}
+
 
 .box-green{
   position: relative;
@@ -73,12 +70,117 @@ input[type="number"]{
   height: 30px;
 }
 
-.box{
+.box-edit{
   height: 70px;
   width: 90%;
   margin: auto;
   background-color: black;
   margin-bottom: 20px;
+}
+
+.box-list{
+  background-color: #cfe2f3;
+  min-height: 450px;
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.box{
+  flex: 1 0 31%; 
+  margin: 5px;
+  height: 100px;
+  max-width: 31%;
+  background-color: blue;
+}
+
+.button-modal{
+  position:relative;
+  float: right;
+  margin-right: 5%;
+  border-radius:0;
+}
+
+.modal{
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content{
+  width: 70%;
+  background-color: #fff;
+}
+
+.modal-header, .modal-footer {
+  padding: 10px;
+}
+
+.modal-title{
+  margin: 0;
+}
+
+.modal-body{
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1 px solid #eee;
+}
+
+@media screen and (max-width: 1100px) and (min-width: 641px) {
+
+  .box-list{
+    background-color: #cfe2f3;
+    min-height: 450px;
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  .box{
+    flex: 1 0 45%; 
+    margin: 5px;
+    height: 100px;
+    max-width: 45%;
+    background-color: blue;
+  }
+}
+
+@media screen and (max-width: 640px) {
+
+  .box-list{
+    background-color: #cfe2f3;
+    min-height: 450px;
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+    border: 1px solid black;
+    display: inline-block;
+  }
+
+  .box{
+    flex: none;
+    margin: auto;
+    width: 90%;
+    max-width: 90%;
+    height: 100px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: blue;
+  }
 }
 
 

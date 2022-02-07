@@ -4,8 +4,6 @@ import store from '../store/store';
 import { boxModified } from '../actions';
 import { connect } from 'react-redux';
 import Modal from './Modal';
-import { updateSourceFile } from 'typescript';
-
 
 interface DataSubmit{
     R: number,
@@ -22,7 +20,12 @@ interface Box{
     creationTime: string
 }
 
-function BoxEditor(props: any){
+interface BoxEditorProps{
+    id: number | undefined;
+
+}
+
+function BoxEditor(props:any){
     const { register, handleSubmit } = useForm<DataSubmit>();
     const [show, setShow] = useState(false);
 
@@ -45,7 +48,7 @@ function BoxEditor(props: any){
    }, [ props.id]);
 
     const boxStyle = {
-        ["backgroundColor" as any]: `rgb(${currentBoxData.R}, ${currentBoxData.G}, ${currentBoxData.B})`  as React.CSSProperties,
+        ["backgroundColor" as string]: `rgb(${currentBoxData.R}, ${currentBoxData.G}, ${currentBoxData.B})`  as React.CSSProperties,
     }
 
     const onSubmit: SubmitHandler<DataSubmit> = data => {
@@ -55,8 +58,15 @@ function BoxEditor(props: any){
         }
     };
 
-    function updateCurrentBox(event:any){
-        console.log(event.value);
+    function updateCurrentBox(event: any){
+        //console.log(event.target.name);
+        let updatedValue = {};
+        updatedValue = {[`${event.target.name}` as string]: Number(`${event.target.value}`)};
+        console.log(currentBoxData);
+        setCurrentBoxData({
+            ...currentBoxData,
+            ...updatedValue
+        });
     }
 
     return(
@@ -67,8 +77,8 @@ function BoxEditor(props: any){
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='selectors'>
                     <label className="label-inserter" htmlFor="R">R: <input min="0" max="255" onKeyUp={updateCurrentBox} type="number" {...register('R')}/></label>            
-                    <label className='label-inserter' htmlFor="G">G: <input min="0" max="255" type="number" {...register('G')}/></label>               
-                    <label className='label-inserter' htmlFor="B">B: <input min="0" max="255" type="number" {...register('B')}/></label>
+                    <label className='label-inserter' htmlFor="G">G: <input min="0" max="255" onKeyUp={updateCurrentBox} type="number" {...register('G')}/></label>               
+                    <label className='label-inserter' htmlFor="B">B: <input min="0" max="255" onKeyUp={updateCurrentBox} type="number" {...register('B')}/></label>
                 </div>
                 <div className="buttons">       
                     <button className="button-insert" type="submit">Apply Color</button>

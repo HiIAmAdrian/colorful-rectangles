@@ -8,8 +8,6 @@ function BoxList(props:any) {
     }
 
     function createBox(R:number, G:number, B:number, id: number){
-        console.log(props.id);
-
         const style = {
             ["backgroundColor" as any]: `rgb(${R}, ${G}, ${B})`  as React.CSSProperties,
             border: props.id === id ? '3px solid #39FF14' : 'none'
@@ -18,6 +16,7 @@ function BoxList(props:any) {
                     style={style} 
                     onClick={() => handleSelectedBox(id)} 
                     className="box"
+                    key={id}
                 >
                 {''}
                 </div>)

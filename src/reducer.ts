@@ -24,7 +24,6 @@ interface Box{
 export default function reducer(state: Array<Box> = [], action: Action) {
     const today = new Date();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    console.log(typeof(time));
     if (action.type === 'inserted')
     {
         return [...state,

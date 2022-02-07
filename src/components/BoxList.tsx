@@ -1,7 +1,22 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-function BoxList(props:any) {
+interface Box{
+    id: number,
+    number: number,
+    R: number,
+    G: number,
+    B: number,
+    creationTime: string
+}
+
+interface BoxListProps{
+    id: number,
+    setSelectedBox(id:number): void;
+    list: Box[];
+}
+
+function BoxList(props:BoxListProps) {
 
     function handleSelectedBox(id: number){
         props.setSelectedBox(id);
@@ -9,7 +24,7 @@ function BoxList(props:any) {
 
     function createBox(R:number, G:number, B:number, id: number){
         const style = {
-            ["backgroundColor" as any]: `rgb(${R}, ${G}, ${B})`  as React.CSSProperties,
+            ["backgroundColor" as string]: `rgb(${R}, ${G}, ${B})` as React.CSSProperties,
             border: props.id === id ? '3px solid #39FF14' : 'none'
         }
         return (<div 
@@ -35,7 +50,7 @@ function BoxList(props:any) {
      );
 }
 
-function mapStateToProps(state:any){
+function mapStateToProps(state:Box[]){
     return {
         list: state
     }

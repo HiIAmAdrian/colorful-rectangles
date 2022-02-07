@@ -4,7 +4,7 @@ import BoxInserter from './components/BoxInserter';
 import BoxList from './components/BoxList';
 
 function App() {
-  const [selectedBox, setSelectedBox] = useState<number | undefined>(undefined);
+  const [selectedBox, setSelectedBox] = useState<number>(0);
 
   const BoxEditorProps={
     id: selectedBox

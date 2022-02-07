@@ -1,10 +1,6 @@
-import * as React from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { boxAdded, boxRandomAdded } from '../actions';
 import store from '../store/store';
-interface BoxInserterProps{
-
-}
 
 interface DataSubmit{
     R: number,
@@ -12,8 +8,7 @@ interface DataSubmit{
     B: number,
 }
 
-
-function BoxInserter(props: BoxInserterProps) {
+function BoxInserter() {
     const { register, handleSubmit } = useForm<DataSubmit>();
     
     const onSubmit: SubmitHandler<DataSubmit> = data => {

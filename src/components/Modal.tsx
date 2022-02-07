@@ -1,9 +1,22 @@
-function Modal(props:any){
+interface Box{
+    id: number,
+    number: number,
+    R: number,
+    G: number,
+    B: number,
+    creationTime: string
+}
+
+interface PropsModal{
+    box: Box;
+    onClose(): void;
+    show: boolean;
+}
+
+function Modal(props:PropsModal){
     if (!props.show){
         return null;
     }
-
-    
 
     return (
         <div className='modal' onClick={props.onClose}>

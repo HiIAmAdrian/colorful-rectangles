@@ -21,11 +21,11 @@ interface Box{
 }
 
 interface BoxEditorProps{
-    id: number | undefined;
+    id: number;
 
 }
 
-function BoxEditor(props:any){
+function BoxEditor(props:BoxEditorProps){
     const { register, handleSubmit } = useForm<DataSubmit>();
     const [show, setShow] = useState(false);
 
@@ -89,7 +89,7 @@ function BoxEditor(props:any){
     );
 }
 
-function mapStateToProps(state:any){
+function mapStateToProps(state:Box[]){
     return {
         list: state
     }

@@ -10,16 +10,17 @@ interface DataSubmit{
 
 function BoxInserter() {
     const { register, handleSubmit } = useForm<DataSubmit>();
+    const MAX_BOXES = 9;
     
     const onSubmit: SubmitHandler<DataSubmit> = data => {
-        if (store.getState().length === 9)
+        if (store.getState().length === MAX_BOXES)
             alert("Number of boxes cannot exceed 9.");
         else if (data.R && data.G && data.B)
             store.dispatch(boxAdded(Number(data.R), Number(data.G), Number(data.B)));   
     };
  
     function insertRandom(){
-        if (store.getState().length === 9)
+        if (store.getState().length === MAX_BOXES)
             alert("Number of boxes cannot exceed 9.");
         else
             store.dispatch(boxRandomAdded());

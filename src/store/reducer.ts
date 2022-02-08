@@ -25,6 +25,8 @@ interface Box{
 export default function reducer(state: Array<Box> = [], action: Action) {
     const today = new Date();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const RGB_MAX = 255;
+    const RGB_MIN = 0;
     if (action.type === actions.BOX_ADDED)
     {
         return [...state,
@@ -43,9 +45,9 @@ export default function reducer(state: Array<Box> = [], action: Action) {
             {
                 id: lastId,
                 number: lastId++,
-                R: randomIntFromInterval(0, 255),
-                G: randomIntFromInterval(0, 255),
-                B: randomIntFromInterval(0, 255),
+                R: randomIntFromInterval(RGB_MIN, RGB_MAX),
+                G: randomIntFromInterval(RGB_MIN, RGB_MAX),
+                B: randomIntFromInterval(RGB_MIN, RGB_MAX),
                 creationTime: time
             }];
     }

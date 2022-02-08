@@ -19,6 +19,8 @@ interface BoxEditorProps{
 }
 
 function BoxEditor(props:BoxEditorProps){
+    const RGB_MAX = 255;
+    const RGB_MIN = 0;
     const [show, setShow] = useState(false);
     const [currentBoxData, setCurrentBoxData] = useState({
         id: 0,
@@ -60,7 +62,7 @@ function BoxEditor(props:BoxEditorProps){
 
     function handleChange(event:any){
         let updatedValue = {};
-        if (event.target.value > 255 || event.target.value < 0)
+        if (event.target.value > RGB_MAX || event.target.value < RGB_MIN)
         {
             alert("Insert a value between 0 and 255.")
         }

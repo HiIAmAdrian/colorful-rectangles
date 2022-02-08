@@ -39,7 +39,6 @@ function BoxList(props:BoxListProps) {
     let showList: JSX.Element[] = [];
     props.list.forEach((box: { R: number; G: number; B:number; id: number}) => {
         showList.push(createBox(box.R, box.G, box.B, box.id));
-        return 0;
     })
 
     return (

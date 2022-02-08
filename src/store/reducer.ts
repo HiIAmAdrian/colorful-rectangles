@@ -1,4 +1,5 @@
 import { randomIntFromInterval } from '../helper';
+import * as actions from './actionTypes'
 
 let lastId: number = 1;
 
@@ -24,7 +25,7 @@ interface Box{
 export default function reducer(state: Array<Box> = [], action: Action) {
     const today = new Date();
     const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    if (action.type === 'inserted')
+    if (action.type === actions.BOX_ADDED)
     {
         return [...state,
         {
@@ -36,7 +37,7 @@ export default function reducer(state: Array<Box> = [], action: Action) {
             creationTime: time
         }];
     }
-    else if (action.type === "insertedRandom")
+    else if (action.type === actions.BOX_RANDOM_ADDED)
     {
         return [...state,
             {
@@ -48,7 +49,7 @@ export default function reducer(state: Array<Box> = [], action: Action) {
                 creationTime: time
             }];
     }
-    else if (action.type === 'modified')
+    else if (action.type === actions.BOX_MODIFIED)
     {
         return state.map(box => box.id !== action.payload.id ? box : {...box, 
             R: action.payload.R,

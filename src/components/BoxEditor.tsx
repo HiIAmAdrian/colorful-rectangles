@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
-import store from '../store/store';
-import { boxModified } from '../store/actions';
-import { connect } from 'react-redux';
+import { getBoxList } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { modify } from '../store/reducer'
 import Modal from './Modal';
 
 interface Box{
@@ -15,12 +15,13 @@ interface Box{
 
 interface BoxEditorProps{
     id: number;
-
 }
 
 function BoxEditor(props:BoxEditorProps){
     const RGB_MAX = 255;
     const RGB_MIN = 0;
+    const boxes = useSelector(getBoxList);
+    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const [currentBoxData, setCurrentBoxData] = useState({
         id: 0,
@@ -32,7 +33,7 @@ function BoxEditor(props:BoxEditorProps){
     });
 
    useEffect(() => {
-      const boxData: Box  = store.getState().filter((box: { id: number; }) => box.id === props.id)[0];
+      const boxData: Box  = boxes.filter((box: { id: number; }) => box.id === props.id)[0];
     setCurrentBoxData({
         ...currentBoxData,
         ...boxData
@@ -47,7 +48,12 @@ function BoxEditor(props:BoxEditorProps){
     function handleSetColors(){
         if (currentBoxData.R && currentBoxData.G && currentBoxData.B)
         {
-            store.dispatch(boxModified(props.id, Number(currentBoxData.R), Number(currentBoxData.G), Number(currentBoxData.B)));
+            dispatch(modify({
+                id: props.id, 
+                R: Number(currentBoxData.R), 
+                G: Number(currentBoxData.G),
+                B: Number(currentBoxData.B)
+            }));
             setCurrentBoxData({
                 ...currentBoxData,
                 id: 0,
@@ -96,10 +102,4 @@ function BoxEditor(props:BoxEditorProps){
     );
 }
 
-function mapStateToProps(state:Box[]){
-    return {
-        list: state
-    }
-}
-
-export default connect(mapStateToProps)(BoxEditor);
+export default BoxEditor;

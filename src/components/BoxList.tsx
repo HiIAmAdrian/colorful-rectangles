@@ -1,21 +1,14 @@
-import { connect } from 'react-redux';
-
-interface Box{
-    id: number,
-    number: number,
-    R: number,
-    G: number,
-    B: number,
-    creationTime: string
-}
+import { useSelector } from 'react-redux';
+import { getBoxList } from '../store/store'
 
 interface BoxListProps{
     id: number,
     setSelectedBox(id:number): void;
-    list: Box[];
 }
 
 function BoxList(props:BoxListProps) {
+
+    const boxes = useSelector(getBoxList);
 
     function handleSelectedBox(id: number){
         props.setSelectedBox(id);
@@ -37,7 +30,7 @@ function BoxList(props:BoxListProps) {
     }
 
     let showList: JSX.Element[] = [];
-    props.list.forEach((box: { R: number; G: number; B:number; id: number}) => {
+    boxes.forEach((box: { R: number; G: number; B:number; id: number}) => {
         showList.push(createBox(box.R, box.G, box.B, box.id));
     })
 
@@ -48,10 +41,4 @@ function BoxList(props:BoxListProps) {
      );
 }
 
-function mapStateToProps(state:Box[]){
-    return {
-        list: state
-    }
-}
-
-export default connect(mapStateToProps)(BoxList);
+export default BoxList;

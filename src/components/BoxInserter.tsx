@@ -1,6 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { boxAdded, boxRandomAdded } from '../store/actions';
-import store from '../store/store';
+import { getBoxList } from '../store/store'
+import { useSelector, useDispatch } from 'react-redux';
+import  { insert, insertRandom } from '../store/reducer'
+
 
 interface DataSubmit{
     R: number,
@@ -10,20 +12,27 @@ interface DataSubmit{
 
 function BoxInserter() {
     const { register, handleSubmit } = useForm<DataSubmit>();
+    const boxes = useSelector(getBoxList);
+    const dispatch = useDispatch()
     const MAX_BOXES = 9;
     
     const onSubmit: SubmitHandler<DataSubmit> = data => {
-        if (store.getState().length === MAX_BOXES)
+        if (boxes.length === MAX_BOXES)
             alert("Number of boxes cannot exceed 9.");
         else if (data.R && data.G && data.B)
-            store.dispatch(boxAdded(Number(data.R), Number(data.G), Number(data.B)));   
+            dispatch(insert({
+                id: 0,
+                R:Number(data.R), 
+                G:Number(data.G),
+                B:Number(data.B)}
+                ));   
     };
  
-    function insertRandom(){
-        if (store.getState().length === MAX_BOXES)
+    function handleRandom(){
+        if (boxes.length === MAX_BOXES)
             alert("Number of boxes cannot exceed 9.");
         else
-            store.dispatch(boxRandomAdded());
+            dispatch(insertRandom());
     }
 
     return (
@@ -39,7 +48,7 @@ function BoxInserter() {
                     <button className="button-insert" type="submit">Insert</button> 
                 </div>
             </form>
-            <button className="button-insert" onClick={insertRandom}>Insert Random</button>
+            <button className="button-insert" onClick={handleRandom}>Insert Random</button>
 
         </div>
       );

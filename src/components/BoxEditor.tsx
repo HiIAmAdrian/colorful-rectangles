@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { getBoxList } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { modify } from '../store/reducer'
@@ -68,6 +68,7 @@ function BoxEditor(props:BoxEditorProps){
 
     function handleChange(event:any){
         let updatedValue = {};
+
         if (event.target.value > RGB_MAX || event.target.value < RGB_MIN)
         {
             alert("Insert a value between 0 and 255.")

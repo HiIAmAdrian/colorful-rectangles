@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import {  useState } from 'react';
 import BoxEditor from './components/BoxEditor';
 import BoxInserter from './components/BoxInserter';
 import BoxList from './components/BoxList';

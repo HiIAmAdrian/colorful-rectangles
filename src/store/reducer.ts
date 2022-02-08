@@ -46,7 +46,7 @@ const boxSlice = createSlice({
                     B: action.payload.B,
                     creationTime: time
                 }
-            ]
+            ];
         },
         insertRandom: (state) => {
             const today = new Date();
@@ -59,7 +59,7 @@ const boxSlice = createSlice({
                     G: randomIntFromInterval(RGB_MIN, RGB_MAX),
                     B: randomIntFromInterval(RGB_MIN, RGB_MAX),
                     creationTime: time
-                }]
+                }];
         },
         modify: (state, action: PayloadAction<Action>) => {
             state.boxList = state.boxList.map(box => box.id !== action.payload.id ? box : {...box, 

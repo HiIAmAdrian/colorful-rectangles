@@ -33,8 +33,6 @@ function Modal(props:PropsModal){
                         <li>B: {props.box.B}</li>
                         <li>Creation time: {props.box.creationTime}</li>
                     </ul>
-                    
-
                 </div>
                 <div className='modal-footer'>
                     <button onClick={props.onClose} className='button-modal'>Close</button>

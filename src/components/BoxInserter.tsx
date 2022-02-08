@@ -1,8 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getBoxList } from '../store/store'
 import { useSelector, useDispatch } from 'react-redux';
-import  { insert, insertRandom } from '../store/reducer'
-
+import { insert, insertRandom } from '../store/reducer'
 
 interface DataSubmit{
     R: number,
@@ -18,21 +17,29 @@ function BoxInserter() {
     
     const onSubmit: SubmitHandler<DataSubmit> = data => {
         if (boxes.length === MAX_BOXES)
+        {
             alert("Number of boxes cannot exceed 9.");
+        }
         else if (data.R && data.G && data.B)
+        {
             dispatch(insert({
                 id: 0,
                 R:Number(data.R), 
                 G:Number(data.G),
                 B:Number(data.B)}
-                ));   
+                ));
+        }
     };
  
     function handleRandom(){
         if (boxes.length === MAX_BOXES)
+        {
             alert("Number of boxes cannot exceed 9.");
+        }
         else
+        {
             dispatch(insertRandom());
+        }
     }
 
     return (
@@ -49,7 +56,6 @@ function BoxInserter() {
                 </div>
             </form>
             <button className="button-insert" onClick={handleRandom}>Insert Random</button>
-
         </div>
       );
 }

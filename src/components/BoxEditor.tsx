@@ -1,15 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import { useForm, SubmitHandler } from "react-hook-form";
+import {useEffect, useState} from 'react';
 import store from '../store/store';
 import { boxModified } from '../actions';
 import { connect } from 'react-redux';
 import Modal from './Modal';
-
-interface DataSubmit{
-    R: number,
-    G: number,
-    B: number,
-}
 
 interface Box{
     id: number,
@@ -26,9 +19,7 @@ interface BoxEditorProps{
 }
 
 function BoxEditor(props:BoxEditorProps){
-    const { register, handleSubmit } = useForm<DataSubmit>();
     const [show, setShow] = useState(false);
-
     const [currentBoxData, setCurrentBoxData] = useState({
         id: 0,
         number: 0,
@@ -48,43 +39,57 @@ function BoxEditor(props:BoxEditorProps){
    }, [ props.id]);
 
     const boxStyle = {
-        ["backgroundColor" as string]: `rgb(${currentBoxData.R}, ${currentBoxData.G}, ${currentBoxData.B})`  as React.CSSProperties,
+        backgroundColor: `rgb(${currentBoxData.R}, ${currentBoxData.G}, ${currentBoxData.B})`,
     }
 
-    const onSubmit: SubmitHandler<DataSubmit> = data => {
-        if (data.R && data.G && data.B)
+    function handleSetColors(){
+        if (currentBoxData.R && currentBoxData.G && currentBoxData.B)
         {
-            store.dispatch(boxModified(props.id, Number(data.R), Number(data.G), Number(data.B)));
+            store.dispatch(boxModified(props.id, Number(currentBoxData.R), Number(currentBoxData.G), Number(currentBoxData.B)));
+            setCurrentBoxData({
+                ...currentBoxData,
+                id: 0,
+                number: 0,
+                R: 0,
+                G: 0,
+                B: 0,
+                creationTime: ''
+            });
         }
     };
 
-    function updateCurrentBox(event: any){
-        //console.log(event.target.name);
+    function handleChange(event:any){
         let updatedValue = {};
-        updatedValue = {[`${event.target.name}` as string]: Number(`${event.target.value}`)};
-        console.log(currentBoxData);
-        setCurrentBoxData({
-            ...currentBoxData,
-            ...updatedValue
-        });
+        if (event.target.value > 255 || event.target.value < 0)
+        {
+            alert("Insert a value between 0 and 255.")
+        }
+        else
+        {
+            updatedValue = {[`${event.target.name}`]: Number(event.target.value)};
+            setCurrentBoxData({
+                ...currentBoxData,
+                ...updatedValue
+            });
+        }
     }
 
     return(
        <div className='box-green'>
-           <h4 className='title'>Box Editor</h4>
-           <button className='button-modal' onClick={() => setShow(true)}>Info</button>
-           <div className="box-edit" style={boxStyle}></div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className='selectors'>
-                    <label className="label-inserter" htmlFor="R">R: <input min="0" max="255" onKeyUp={updateCurrentBox} type="number" {...register('R')}/></label>            
-                    <label className='label-inserter' htmlFor="G">G: <input min="0" max="255" onKeyUp={updateCurrentBox} type="number" {...register('G')}/></label>               
-                    <label className='label-inserter' htmlFor="B">B: <input min="0" max="255" onKeyUp={updateCurrentBox} type="number" {...register('B')}/></label>
-                </div>
-                <div className="buttons">       
-                    <button className="button-insert" type="submit">Apply Color</button>
-                </div>
+            <h4 className='title'>Box Editor</h4>
+            <button className='button-modal' onClick={() => setShow(true)}>Info</button>
+            <div className="box-edit" style={boxStyle}></div>
+            <form>
+            <div className='selectors'>
+                <label className="label-inserter" htmlFor="R">R: <input min="0" max="255" onChange={handleChange} type="number" name='R' value={currentBoxData.R} /></label>
+                <label className='label-inserter' htmlFor="G">G: <input min="0" max="255" onChange={handleChange} type="number" name='G' value={currentBoxData.G} /></label>
+                <label className='label-inserter' htmlFor="B">B: <input min="0" max="255" onChange={handleChange} type="number" name='B' value={currentBoxData.B} /></label>
+            </div>
             </form>
-            <Modal box={currentBoxData} onClose={() => setShow(false)} show={show}/>
+            <div className="buttons">
+                <button className="button-insert" onClick={handleSetColors}>Apply Color</button>
+            </div>
+            <Modal box={currentBoxData} onClose={() => setShow(false)} show={show} />
         </div>
     );
 }

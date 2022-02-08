@@ -30,9 +30,9 @@ function BoxInserter() {
             <h4 className='title'>Box Inserter</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='selectors'>
-                    <label className="label-inserter" htmlFor="R">R: <input min="0" max="255" type="number" {...register('R', { min: 0, max: 255 })}/></label>                  
-                    <label className='label-inserter' htmlFor="G">G: <input min="0" max="255" type="number" {...register('G', { min: 0, max: 255 })}/></label>
-                    <label className='label-inserter' htmlFor="B">B: <input min="0" max="255" type="number" {...register('B', { min: 0, max: 255 })}/></label>
+                    <label className="label-inserter" htmlFor="R">R: <input min="0" max="255" type="number" {...register('R')}/></label>                  
+                    <label className='label-inserter' htmlFor="G">G: <input min="0" max="255" type="number" {...register('G')}/></label>
+                    <label className='label-inserter' htmlFor="B">B: <input min="0" max="255" type="number" {...register('B')}/></label>
                 </div>
                 <div className="buttons">       
                     <button className="button-insert" type="submit">Insert</button> 

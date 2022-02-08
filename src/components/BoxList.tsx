@@ -24,7 +24,7 @@ function BoxList(props:BoxListProps) {
 
     function createBox(R:number, G:number, B:number, id: number){
         const style = {
-            ["backgroundColor" as string]: `rgb(${R}, ${G}, ${B})` as React.CSSProperties,
+            backgroundColor: `rgb(${R}, ${G}, ${B})`,
             border: props.id === id ? '3px solid #39FF14' : 'none'
         }
         return (<div 

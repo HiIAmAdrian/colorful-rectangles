@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { boxAdded, boxRandomAdded } from '../actions';
+import { boxAdded, boxRandomAdded } from '../store/actions';
 import store from '../store/store';
 
 interface DataSubmit{

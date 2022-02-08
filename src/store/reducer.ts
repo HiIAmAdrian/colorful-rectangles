@@ -1,4 +1,4 @@
-import { randomIntFromInterval } from './helper';
+import { randomIntFromInterval } from '../helper';
 
 let lastId: number = 1;
 

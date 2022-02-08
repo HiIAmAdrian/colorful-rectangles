@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import store from '../store/store';
-import { boxModified } from '../actions';
+import { boxModified } from '../store/actions';
 import { connect } from 'react-redux';
 import Modal from './Modal';
 

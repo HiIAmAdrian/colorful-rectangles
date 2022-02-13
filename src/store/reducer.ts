@@ -25,9 +25,9 @@ const initialState: BoxSliceState = {
     boxList: [],
 };
 
-let lastId: number = 1;
-const RGB_MAX: number= 255;
-const RGB_MIN: number = 0;
+let lastId = 1;
+const RGB_MAX = 255;
+const RGB_MIN = 0;
 
 const boxSlice = createSlice({
     name: "boxList",

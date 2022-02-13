@@ -24,9 +24,9 @@ function BoxInserter() {
         {
             dispatch(insert({
                 id: 0,
-                R:Number(data.R), 
-                G:Number(data.G),
-                B:Number(data.B)}
+                R: +data.R, 
+                G: +data.G,
+                B: +data.B}
                 ));
         }
     };

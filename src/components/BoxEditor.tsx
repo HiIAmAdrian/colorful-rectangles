@@ -50,9 +50,9 @@ function BoxEditor(props:BoxEditorProps){
         {
             dispatch(modify({
                 id: props.id, 
-                R: Number(currentBoxData.R), 
-                G: Number(currentBoxData.G),
-                B: Number(currentBoxData.B)
+                R: +currentBoxData.R, 
+                G: +currentBoxData.G,
+                B: +currentBoxData.B
             }));
             setCurrentBoxData({
                 ...currentBoxData,
@@ -66,16 +66,16 @@ function BoxEditor(props:BoxEditorProps){
         }
     };
 
-    function handleChange(event:any){
+    function handleChange(event: React.ChangeEvent<HTMLInputElement>){
         let updatedValue = {};
 
-        if (event.target.value > RGB_MAX || event.target.value < RGB_MIN)
+        if (+event.target.value > RGB_MAX || +event.target.value < RGB_MIN)
         {
             alert("Insert a value between 0 and 255.")
         }
         else
         {
-            updatedValue = {[`${event.target.name}`]: Number(event.target.value)};
+            updatedValue = {[event.target.name]: +event.target.value};
             setCurrentBoxData({
                 ...currentBoxData,
                 ...updatedValue
